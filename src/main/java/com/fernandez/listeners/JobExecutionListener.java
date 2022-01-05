@@ -1,4 +1,4 @@
-package com.fernandez.springbatch.listeners;
+package com.fernandez.listeners;
 
 import org.springframework.batch.core.JobExecution;
 

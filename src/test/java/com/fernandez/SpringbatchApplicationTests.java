@@ -1,4 +1,4 @@
-package com.fernandez.springbatch;
+package com.fernandez;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

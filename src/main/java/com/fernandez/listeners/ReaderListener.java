@@ -1,13 +1,12 @@
-package com.fernandez.springbatch.listeners;
+package com.fernandez.listeners;
 
-import com.fernandez.springbatch.model.CreditCard;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.ItemReadListener;
 
-public class CreditCardIItemReaderListener implements ItemReadListener<CreditCard> {
+public class ReaderListener implements ItemReadListener<String> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreditCardIItemReaderListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReaderListener.class);
 
     @Override
     public void beforeRead() {
@@ -15,7 +14,7 @@ public class CreditCardIItemReaderListener implements ItemReadListener<CreditCar
     }
 
     @Override
-    public void afterRead(CreditCard creditCard) {
+    public void afterRead(String creditCard) {
         LOGGER.info("afterRead: " + creditCard.toString());
     }
 
