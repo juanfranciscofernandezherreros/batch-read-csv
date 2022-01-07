@@ -45,6 +45,7 @@ public class BatchConfig {
 		return steps.get("step2").
 				<Integer,Integer>chunk(3)
 				.reader(jsonItemReader(null))
+				.processor(new Processor())
 				.writer(new Writer())
 				.build();
 	}
