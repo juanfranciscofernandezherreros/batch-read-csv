@@ -1,0 +1,10 @@
+[
+  {
+    "productId": 1,
+    "prodName": "Ford",
+    "productDesc": "Apple Cell from Json",
+    "unit": 10,
+    "price": 300.23
+  }
+
+]

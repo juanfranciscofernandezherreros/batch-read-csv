@@ -2,7 +2,7 @@ package com.fernandez.dto;
 
 import java.math.BigDecimal;
 
-public class MatchDTO {
+public class ProductDTO {
 
     private Integer productId;
     private String prodName;
@@ -50,14 +50,4 @@ public class MatchDTO {
         this.productDesc = productDesc;
     }
 
-    @Override
-    public String toString() {
-        return "MatchDTO{" +
-                "productId=" + productId +
-                ", prodName='" + prodName + '\'' +
-                ", price=" + price +
-                ", unit=" + unit +
-                ", productDesc='" + productDesc + '\'' +
-                '}';
-    }
 }
