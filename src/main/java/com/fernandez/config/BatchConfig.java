@@ -34,7 +34,7 @@ public class BatchConfig {
 
 	@Bean
 	public Job helloWorldJob(){
-		return jobBuilderFactory.get("processJob")
+		return jobBuilderFactory.get("readJSON")
 				.incrementer(new RunIdIncrementer())
 				.start(step2())
 				.build();
