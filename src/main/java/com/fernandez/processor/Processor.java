@@ -2,12 +2,16 @@ package com.fernandez.processor;
 import com.fernandez.dto.ProductDTO;
 import com.fernandez.entity.Product;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.core.io.Resource;
 
-public class Processor implements ItemProcessor<ProductDTO, Product> {
+import java.util.Arrays;
+import java.util.List;
+
+public class Processor implements ItemProcessor<List<ProductDTO>, Product> {
 
     @Override
-    public Product process(ProductDTO data) {
-        return new Product(data.getProductId(),data.getProdName(),data.getPrice(),data.getUnit(),data.getProductDesc());
+    public Product process(List<ProductDTO> resources) {
+        return new Product();
     }
 
 }

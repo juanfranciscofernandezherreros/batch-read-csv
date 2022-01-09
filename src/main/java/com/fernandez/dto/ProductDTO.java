@@ -10,6 +10,13 @@ public class ProductDTO {
     private Integer unit;
     private String productDesc;
 
+    public ProductDTO() {
+    }
+
+    public ProductDTO(String prodName) {
+        this.prodName = prodName;
+    }
+
     public Integer getProductId() {
         return productId;
     }

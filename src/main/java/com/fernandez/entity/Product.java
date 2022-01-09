@@ -10,6 +10,9 @@ public class Product {
     private Integer unit;
     private String product;
 
+    public Product() {
+    }
+
     public Product(Integer productId, String prodName, BigDecimal price, Integer unit, String product) {
         this.productId = productId;
         this.prodName = prodName;
