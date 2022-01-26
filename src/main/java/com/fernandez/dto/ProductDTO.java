@@ -4,50 +4,30 @@ import java.math.BigDecimal;
 
 public class ProductDTO {
 
-    private Integer productId;
-    private String prodName;
-    private BigDecimal price;
-    private Integer unit;
-    private String productDesc;
+    private String RiskGroup;
+    private String Description;
 
-    public Integer getProductId() {
-        return productId;
+    public String getRiskGroup() {
+        return RiskGroup;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setRiskGroup(String riskGroup) {
+        RiskGroup = riskGroup;
     }
 
-    public String getProdName() {
-        return prodName;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setProdName(String prodName) {
-        this.prodName = prodName;
+    public void setDescription(String description) {
+        Description = description;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    @Override
+    public String toString() {
+        return "ProductDTO{" +
+                "RiskGroup='" + RiskGroup + '\'' +
+                ", Description='" + Description + '\'' +
+                '}';
     }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Integer getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Integer unit) {
-        this.unit = unit;
-    }
-
-    public String getProductDesc() {
-        return productDesc;
-    }
-
-    public void setProductDesc(String productDesc) {
-        this.productDesc = productDesc;
-    }
-
 }

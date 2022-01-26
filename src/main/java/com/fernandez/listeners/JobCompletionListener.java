@@ -14,4 +14,3 @@ public class JobCompletionListener extends JobExecutionListenerSupport {
     }
 
 }
-

@@ -1,66 +1,70 @@
 package com.fernandez.config;
 
+import com.fernandez.dto.Product;
 import com.fernandez.dto.ProductDTO;
-import com.fernandez.entity.Product;
-import com.fernandez.listeners.JobCompletionListener;
-import com.fernandez.processor.Processor;
+import com.fernandez.listeners.*;
+import com.fernandez.processor.MyCustomProcessor;
+import com.fernandez.reader.MyCustomReader;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.json.JacksonJsonObjectReader;
-import org.springframework.batch.item.json.JsonItemReader;
+import org.springframework.batch.core.step.tasklet.TaskletStep;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.fernandez.writer.Writer;
-import org.springframework.core.io.FileSystemResource;
+import com.fernandez.writer.MyCustomWriter;
+
+import java.io.Writer;
 
 @Configuration
 public class BatchConfig {
 
 	@Autowired
-	JobBuilderFactory jobBuilderFactory;
+	public JobBuilderFactory jobBuilderFactory;
 
 	@Autowired
-	StepBuilderFactory stepBuilderFactory;
+	public StepBuilderFactory stepBuilderFactory;
+
+	@Autowired
+	public JobExecListener jobExecutionListener;
 
 	@Bean
-	public Job helloWorldJob(){
-		return jobBuilderFactory.get("readJSON")
-				.incrementer(new RunIdIncrementer())
-				.start(step2())
+	public Job job(Step step) {
+		Job job = jobBuilderFactory.get("job1")
+				.listener(jobExecutionListener)
+				.flow(step)
+				.end()
 				.build();
+		return job;
 	}
 
-
 	@Bean
-	public Step step2()  {
-		return stepBuilderFactory
-				.get("movieStep")
-				.<ProductDTO, Product>chunk(10)
-				.reader(jsonItemReader(null))
-				.processor(new Processor())
-				.writer(new Writer())
+	public Step step() {
+
+		TaskletStep step = stepBuilderFactory.get("step1")
+				.<ProductDTO,Product>chunk(1)
+				.reader(new MyCustomReader())
+				.processor(new MyCustomProcessor())
+				.writer(new MyCustomWriter())
+				.listener(readerListener())
+				.listener(processListener())
 				.build();
-	}
-
-	@StepScope
-	@Bean
-	public JsonItemReader jsonItemReader(
-			@Value( "#{jobParameters['fileInput']}" ) FileSystemResource inputFile){
-		JsonItemReader reader = new JsonItemReader(inputFile, new JacksonJsonObjectReader(ProductDTO.class));
- 		return reader;
+		return step;
 	}
 
 	@Bean
-	public JobExecutionListener listener() {
-		return new JobCompletionListener();
+	public ReaderListener readerListener() {
+		return new ReaderListener();
 	}
+
+	@Bean
+	public ProcessListener processListener() {
+		return new ProcessListener();
+	}
+
 
 
 

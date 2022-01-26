@@ -1,11 +1,13 @@
 package com.fernandez.writer;
 
-import com.fernandez.entity.Product;
+import com.fernandez.dto.Product;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class Writer implements ItemWriter<Product> {
+@Component
+public class MyCustomWriter implements ItemWriter<Product> {
 
     @Override
     public void write(List<? extends Product> messages) throws Exception {
