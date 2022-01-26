@@ -2,7 +2,6 @@ package com.fernandez.config;
 
 import com.fernandez.dto.Product;
 import com.fernandez.dto.ProductDTO;
-import com.fernandez.listeners.*;
 import com.fernandez.processor.MyCustomProcessor;
 import com.fernandez.reader.MyCustomReader;
 import org.springframework.batch.core.Job;
@@ -28,13 +27,9 @@ public class BatchConfig {
 	@Autowired
 	public StepBuilderFactory stepBuilderFactory;
 
-	@Autowired
-	public JobExecListener jobExecutionListener;
-
 	@Bean
 	public Job job(Step step) {
 		Job job = jobBuilderFactory.get("job1")
-				.listener(jobExecutionListener)
 				.flow(step)
 				.end()
 				.build();
@@ -49,23 +44,9 @@ public class BatchConfig {
 				.reader(new MyCustomReader())
 				.processor(new MyCustomProcessor())
 				.writer(new MyCustomWriter())
-				.listener(readerListener())
-				.listener(processListener())
 				.build();
 		return step;
 	}
-
-	@Bean
-	public ReaderListener readerListener() {
-		return new ReaderListener();
-	}
-
-	@Bean
-	public ProcessListener processListener() {
-		return new ProcessListener();
-	}
-
-
 
 
 }
