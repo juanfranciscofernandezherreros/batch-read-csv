@@ -4,6 +4,7 @@ import com.fernandez.dto.Product;
 import com.fernandez.dto.ProductDTO;
 import com.fernandez.listener.*;
 import com.fernandez.processor.MyCustomProcessor;
+import com.fernandez.reader.MyCustomReader;
 import com.fernandez.service.DownloadFileService;
 import com.fernandez.service.EmailPort;
 import com.fernandez.tasklet.FileDeletingTasklet;

@@ -1,4 +1,4 @@
-package com.fernandez.listener;
+package com.fernandez.reader;
 
 import com.fernandez.dto.ProductDTO;
 import org.springframework.batch.item.ItemReader;
