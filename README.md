@@ -26,3 +26,5 @@ https://informaticamadridmayor.es/tips/instalacion-del-servidor-sftp-ssh-ftp-en-
 https://codenotfound.com/spring-batch-tasklet-example.html
 
 https://howtodoinjava.com/spring-batch/delete-archive-files-after-read/
+
+https://medium.com/karibu-blog/c%C3%B3mo-enviar-un-mail-con-spring-boot-f86c2f7af678

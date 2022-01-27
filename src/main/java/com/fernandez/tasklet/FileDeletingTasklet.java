@@ -1,7 +1,5 @@
 package com.fernandez.tasklet;
 
-import com.fernandez.service.DeleteFileService;
-import com.fernandez.service.DownloadFileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.StepContribution;
@@ -18,12 +16,7 @@ import java.io.File;
 @Component
 public class FileDeletingTasklet implements Tasklet {
 
-    @Autowired
-    private DeleteFileService deleteFileService;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(FileDeletingTasklet.class);
-
-    private Resource directory;
 
     private Resource[] resources;
 
