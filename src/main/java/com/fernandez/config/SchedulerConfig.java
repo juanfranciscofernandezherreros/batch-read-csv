@@ -23,6 +23,7 @@ public class SchedulerConfig {
 
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 
+    @Scheduled(cron="*/60 * * * * ?")
     public void scheduleByFixedRate() throws Exception {
         System.out.println("Batch job starting");
         JobParameters jobParameters = new JobParametersBuilder()
