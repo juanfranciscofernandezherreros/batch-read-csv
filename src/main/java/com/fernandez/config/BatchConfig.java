@@ -2,10 +2,9 @@ package com.fernandez.config;
 
 import com.fernandez.dto.Product;
 import com.fernandez.dto.ProductDTO;
+import com.fernandez.listener.*;
 import com.fernandez.processor.MyCustomProcessor;
-import com.fernandez.reader.MyCustomReader;
 import com.fernandez.service.DownloadFileService;
-import com.fernandez.service.DownloadTransferServiceImpl;
 import com.fernandez.service.EmailPort;
 import com.fernandez.tasklet.FileDeletingTasklet;
 import com.fernandez.tasklet.FileDownloadTasklet;
@@ -21,8 +20,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.fernandez.writer.MyCustomWriter;
 import org.springframework.core.io.Resource;
-
-import javax.validation.constraints.Email;
+import org.springframework.batch.core.JobExecutionListener;
 
 @Configuration
 public class BatchConfig {
@@ -42,10 +40,15 @@ public class BatchConfig {
 	@Autowired
 	private EmailPort emailPort;
 
+	@Autowired
+	private MyCustomReader myCustomReader;
+
 	@Bean
 	public Job demoJob(){
 		return jobBuilderFactory.get("demoJob")
 				.incrementer(new RunIdIncrementer())
+				.listener(listener())
+				.listener(new JobResultListener())
 				//.start(stepDownloadTasklet())
 				.start(stepSaveCsv())
 				//.next(stepDeleteTasklet())
@@ -68,6 +71,9 @@ public class BatchConfig {
 				.reader(new MyCustomReader())
 				.processor(new MyCustomProcessor())
 				.writer(new MyCustomWriter())
+				.listener(new ReaderListener())
+				.listener(new ProcessListener())
+				.listener(new WriterListener())
 				.build();
 	}
 
@@ -86,6 +92,12 @@ public class BatchConfig {
 		return stepBuilderFactory.get("stepEmail")
 				.tasklet(task)
 				.build();
+	}
+
+	@Bean
+	public JobExecutionListener listener() {
+
+		return new JobCompletionListener();
 	}
 
 

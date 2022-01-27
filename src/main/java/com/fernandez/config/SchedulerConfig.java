@@ -6,11 +6,9 @@ import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 @Configuration
 public class SchedulerConfig {
@@ -21,13 +19,14 @@ public class SchedulerConfig {
     @Autowired
     Job job;
 
+
+
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 
     @Scheduled(cron="*/60 * * * * ?")
     public void scheduleByFixedRate() throws Exception {
         System.out.println("Batch job starting");
-        JobParameters jobParameters = new JobParametersBuilder()
-                .addLong("time", System.currentTimeMillis()).toJobParameters();
+        JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters();
         jobLauncher.run(job, jobParameters);
         System.out.println("Batch job executed successfully\n");
     }
