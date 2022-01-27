@@ -7,3 +7,20 @@ https://walkingtechie.blogspot.com/2017/07/spring-batch-example-in-spring-boot-c
 https://howtodoinjava.com/spring-batch/flatfileitemreader-read-csv-example/#read
 
 https://www.techgeeknext.com/spring-boot/spring-boot-spring-batch-listener-example
+
+https://howtodoinjava.com/spring-batch/spring-batch-event-listeners/
+
+https://mkyong.com/spring-batch/spring-batch-listeners-example/
+
+StepExecutionListener
+ItemReadListener
+ItemProcessListener
+ItemWriteListener
+ChunkListener
+SkipListener
+
+https://simplesolution.dev/spring-boot-sftp-file-transfer-using-jsch-java-library/
+
+https://informaticamadridmayor.es/tips/instalacion-del-servidor-sftp-ssh-ftp-en-windows-con-openssh/
+
+https://codenotfound.com/spring-batch-tasklet-example.html
