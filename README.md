@@ -24,3 +24,5 @@ https://simplesolution.dev/spring-boot-sftp-file-transfer-using-jsch-java-librar
 https://informaticamadridmayor.es/tips/instalacion-del-servidor-sftp-ssh-ftp-en-windows-con-openssh/
 
 https://codenotfound.com/spring-batch-tasklet-example.html
+
+https://howtodoinjava.com/spring-batch/delete-archive-files-after-read/

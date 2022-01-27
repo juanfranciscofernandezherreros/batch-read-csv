@@ -13,10 +13,12 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.fernandez.writer.MyCustomWriter;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.Resource;
 
 @Configuration
 public class BatchConfig {
@@ -27,12 +29,15 @@ public class BatchConfig {
 	@Autowired
 	public StepBuilderFactory stepBuilderFactory;
 
+	@Value("file:./input/*.csv")
+	private Resource[] inputResources;
+
 	@Bean
 	public Job demoJob(){
 		return jobBuilderFactory.get("demoJob")
 				.incrementer(new RunIdIncrementer())
 				.start(stepDownloadTasklet())
-				.next(stepSaveCsv())
+				//.next(stepSaveCsv())
 				.next(stepDeleteTasklet())
 				.build();
 	}
@@ -46,7 +51,7 @@ public class BatchConfig {
 
 	@Bean
 	public Step stepSaveCsv() {
-		return stepBuilderFactory.get("saveCsv")
+		return stepBuilderFactory.get("stepTwo")
 				.<ProductDTO,Product>chunk(1)
 				.reader(new MyCustomReader())
 				.processor(new MyCustomProcessor())
@@ -56,8 +61,10 @@ public class BatchConfig {
 
 	@Bean
 	public Step stepDeleteTasklet(){
-		return stepBuilderFactory.get("stepTwo")
-				.tasklet(new FileDeletingTasklet())
+		FileDeletingTasklet task = new FileDeletingTasklet();
+		task.setResources(inputResources);
+		return stepBuilderFactory.get("step3")
+				.tasklet(task)
 				.build();
 	}
 
